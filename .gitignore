@@ -1,0 +1,46 @@
+# GIT exclusions
+
+# all platforms
+.vscode
+.idea
+.metadata
+
+# macOS specific
+.DS_Store
+._*
+*.xcodeproj
+
+# Windows specific
+*.lnk
+
+# objects and executables
+*.o
+a.out
+*.OBJ
+*.EXE
+
+# 3IF1020 specific
+tris
+listes
+TestNumber
+TestExpression
+server_1
+server_2
+server_3
+server_4
+client_5
+server_5
+client_6
+server_6
+Threads
+Consumer
+Producer
+
+# Commonly found in student projects
+main
+test
+tests
+googletest
+gtest
+boost*
+
