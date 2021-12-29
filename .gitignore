@@ -13,11 +13,12 @@
 # Windows specific
 *.lnk
 
-# objects and executables
+# objects and executables and cores
 *.o
 a.out
 *.OBJ
 *.EXE
+core
 
 # 3IF1020 specific
 tris
