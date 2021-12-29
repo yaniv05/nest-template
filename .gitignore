@@ -12,6 +12,7 @@
 
 # Windows specific
 *.lnk
+*.gch
 
 # objects and executables and cores
 *.o
