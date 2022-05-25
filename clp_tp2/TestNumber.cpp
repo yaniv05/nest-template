@@ -3,7 +3,7 @@
  * 3IF1020 - Concepts des langages de programmation - TP n°2
  *
  * TestNumber.cpp
- * c++ -std=c++20 -o TestNumber Number.cpp TestNumber.cpp -lgtest
+ * c++ -std=c++20 -o TestNumber Number.cpp TestNumber.cpp -lgtest -lpthread
  */
 
 #include <exception>
