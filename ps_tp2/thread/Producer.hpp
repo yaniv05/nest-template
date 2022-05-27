@@ -23,8 +23,10 @@ public:
     using ProdOrCons::ProdOrCons;
  
     void operator()() override {
-        // TODO : déposer dans box nb_messages nombres entiers positifs avec attente
-        // aléatoire entre chaque. Afficher des messages pour suivre l'avancement.
+        // TODO : 
+        // - Déposer dans box_ nb_messages_ entiers positifs avec attente
+        //   aléatoire avant chaque dépôt.
+        // - Afficher des messages entre chaque étape pour suivre l'avancement.
     }
 };
  

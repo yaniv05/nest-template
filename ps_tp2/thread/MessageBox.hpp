@@ -21,16 +21,21 @@
 class MessageBox : public BasicMessageBox {
 public:
     void put( int message ) {
-        // TODO : ajouter les mecanismes de synchronisation
+        // TODO :
+        // - Ajouter les instructions de synchronisation
+        // - Ne pas faire d'affichage dans cette méthode
         basic_put( message );
     }
  
     int get() {
-        // TODO : ajouter les mecanismes de synchronisation
+        // TODO :
+        // - Ajouter les instructions de synchronisation
+        // - Ne pas faire d'affichage dans cette méthode
         int message{ basic_get() };
         return message;
     }
 private:
-    // TODO : ajouter les objets de synchronisation
+    // TODO : 
+    // - Ajouter les objets de synchronisation
 };
  

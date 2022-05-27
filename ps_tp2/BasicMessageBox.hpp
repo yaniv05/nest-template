@@ -53,3 +53,14 @@ private:
     unsigned get_index_;
 };
  
+/*
+ * Cette classe est utilisée comme superclasse de thread/MessageBox et process/MessageBox.
+ * Pourtant, elle n'a pas de destructeur virtuel, et le polymorphisme n'est pas utilisé
+ * pour les 2 méthodes.
+ * La raison en est la suivante : dans le cas où producteurs et consommateurs sont des
+ * processus, la boîte à lettres est en mémoire partagée, il n'est donc pas possible
+ * d'avoir des méthodes virtuelles qui nécessitent l'utilisation d'adresses (celles des
+ * méthodes) qui ne peuvent être valides pour tous les processus (espaces mémoires
+ * distincts).
+ */
+
