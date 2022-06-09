@@ -12,20 +12,31 @@
 
 ## Sur MyDocker, dans un Terminal :
 
-1. Configurer votre identité Git (en utilisant bien sûr vos propres prénom et nom) :
+3. Configurer votre identité Git (en utilisant bien sûr vos propres prénom et nom) :
 ```sh
 git config --global user.name "Prénom Nom"
 git config --global user.email "prenom.nom@student-cs.fr"
 ```
 
-2. Créer une [paire de clefs SSH](https://gitlab-student.centralesupelec.fr/help/ssh/index.md#generate-an-ssh-key-pair) et renseigner la clef publique dans votre profil sur GitLab.
+4. Créer une paire de clefs SSH :
+```sh
+ssh-keygen -t ed25519 -f /config/.ssh/id_ed25519
+```
 
-3. Faire une copie locale du dépôt (en remplaçant `<username>` par votre identifiant, l'URL est accessible dans le menu Clone sur GitLab) :
+5. Ouvrir la clef publique dans l'éditeur (CTRL ou ⌘ clic sur le nom du fichier tel qu'il apparait dans le terminal dans la ligne `Your public key has been saved in /config/.ssh/id_ed25519`), copier le contenu du fichier
+
+## Sur GitLab
+
+6. Afficher la fenêtre de réglages de vos préférences (menu accessible par l'icône en haut à droite), sélectionner l'onglet `SSK Keys`, coller votre clef publique dans le champ `Key`, changer le titre éventuellement et cliquer sur le bouton `Add key`
+
+## Sur MyDocker, dans un Terminal :
+
+7. Dans le répertoire **`workspace`**, faire une copie locale de votre dépôt (en remplaçant `<username>` par votre identifiant, l'URL est accessible dans le menu **`Clone`** sur GitLab) :
 ```sh
 git clone git@gitlab-student.centralesupelec.fr:<username>/tp_3if1020.git
 ```
 
-4. Au minimum, à chaque fois qu'il est indiqué dans le sujet ***add, commit & push***, en étant dans le dossier correspondant au TP sur lequel vous travaillez : 
+8. Au minimum, à chaque fois qu'il est indiqué dans le sujet ***add, commit & push***, en étant dans le dossier correspondant au TP sur lequel vous travaillez : 
 ```sh
 git add .
 git commit -m "un commentaire approprié"
