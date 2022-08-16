@@ -33,7 +33,7 @@ ssh-keygen -t ed25519 -f /config/.ssh/id_ed25519
 ```
 
 5. Ouvrir la clef publique dans l'éditeur (CTRL ou ⌘ clic sur le nom du fichier tel qu'il 
-apparait dans le terminal dans la ligne `Your public key has been saved in /config/.ssh/id_ed25519`), 
+apparait dans le terminal dans la ligne `Your public key has been saved in /config/.ssh/id_ed25519.pub`), 
 copier le contenu du fichier
 
 ## Sur GitLab
