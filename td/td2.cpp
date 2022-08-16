@@ -139,6 +139,8 @@ void test_53()
 }
 
 /*
+// c++ -std=c++20 -O3 -o td2 td2.cpp -lgmp
+
 #include <boost/multiprecision/gmp.hpp>
 
 boost::multiprecision::mpz_int factorial_gmp( unsigned long l )
@@ -165,7 +167,6 @@ int main( int argc, char * argv[] )
     test_34();
     test_41();
     test_42();
-    test_43();
     test_51();
     if( argc > 1 ) {
         unsigned int n{ static_cast< unsigned int >( std::stoul( argv[1] ))};
