@@ -96,7 +96,7 @@ int main()
     p2.empile( 5 );
 
     std::cout << "p1.sommet() = " << p1.sommet() << "\n";
-    std::cout << "p2.sommet() = " << p1.sommet() << "\n";
+    std::cout << "p2.sommet() = " << p2.sommet() << "\n";
     
     //f( p1 );
 }
