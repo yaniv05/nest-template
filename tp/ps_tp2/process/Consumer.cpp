@@ -13,7 +13,6 @@
 #include <boost/interprocess/mapped_region.hpp>
 
 #include "../Random.hpp"
-#include "../osyncstream.hpp"
 
 #include "ProdOrCons.hpp"
 #include "MessageBox.hpp"
@@ -28,13 +27,12 @@ public:
  
     void operator()() override {
         // TODO : déposer dans box nb_messages nombres entiers positifs avec attente
-        // aléatoire entre chaque. Afficher des messages, via un osyncstream,
-        // pour suivre l'avancement.
+        // aléatoire entre chaque. Afficher des messages pour suivre l'avancement.
     }
 };
 
 
-int main ()
+int main()
 {
     using namespace boost::interprocess;
 

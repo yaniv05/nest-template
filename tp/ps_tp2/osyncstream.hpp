@@ -18,7 +18,7 @@
  * Version simplifiée de la classe de même nom de la bibliothèque standard C++20
  *
  * Exemple d'utilisation
- *   { osyncstream( std::cout ) << "hello world\n"; }
+ *   { osyncstream{ std::cout } << "hello world\n"; }
  */
  
 #include <iostream>

@@ -21,7 +21,8 @@
  * Producteur de messages
  */
 class Producer : public ProdOrCons {
-    // Le constructeur de ProdOrCons peut être utilisé pour Producer
+public:
+    // Le constructeur de ProdOrCons sera utilisé comme constructeur de Producer
     using ProdOrCons::ProdOrCons;
  
     void operator()() override {
@@ -29,7 +30,8 @@ class Producer : public ProdOrCons {
         // aléatoire entre chaque. Afficher des messages pour suivre l'avancement.
     }
 };
- 
+
+
 int main()
 {
     using namespace boost::interprocess;
