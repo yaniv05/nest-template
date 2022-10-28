@@ -47,7 +47,9 @@ public:
 protected:
     static const unsigned box_size_ = 2;
 private:
-    // FIFO réalisée par un tableau géré en tampon circulaire via 2 indices (dépôt et retrait)
+    // FIFO réalisée par un tableau géré en tampon circulaire via 2 indices (dépôt et retrait).
+    // Les 2 indices sont privés : c'est volontaire, vous ne devez pas les utiliser pour savoir
+    // si la boîte est vide ou pleine.
     std::array< int, box_size_ > box_;
     unsigned put_index_;
     unsigned get_index_;
