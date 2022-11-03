@@ -1,3 +1,17 @@
+/*
+ * Cursus CentraleSupélec - Dominante Informatique et numérique
+ * 3IF1020 - Concepts des langages de programmation - Chapitre n°6
+ * Dominique Marcadet - 2022 - CC BY-SA
+ *
+ * sac.cpp
+ *
+ * Compilation :
+ *     c++ -std=c++20 -o new new.cpp
+ * Exécution :
+ *     ./new
+ */
+
+
 
 #include <iostream>
 #include <vector>
