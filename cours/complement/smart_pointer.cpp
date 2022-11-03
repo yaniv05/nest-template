@@ -14,6 +14,7 @@
 
 #include <iostream>
 #include <utility>
+#include <memory>
 
 struct A {
     A( int a ) : a_{ a } { std::cout << "constructor with " << a_ << "\n"; }
