@@ -1,7 +1,7 @@
 """
  * Cursus CentraleSupélec - Dominante Informatique et numérique
  * 3IF1020 - Concepts des langages de programmation - Chapitre n°1
- * Dominique Marcadet - 2022 - CC BY-SA
+ * Dominique Marcadet - 2022-23 - CC BY-SA
  *
  * HelloSayer.py
  *
@@ -9,7 +9,6 @@
  *     python3 HelloSayer.py World
 """
 
-# HelloSayer.py
 import sys
 
 def hello( world ):
