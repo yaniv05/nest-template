@@ -15,60 +15,60 @@
 1. Exécution sur les 2 fichiers source du préprocesseur, puis du compilateur, enfin de l'éditeur de liens ; 
 Les fichiers intermédiaires ne sont pas conservés, l'option `-o` permet de fixer le nom de 
 l'exécutable :
-```sh
-      c++ -o CallHello CallHello.cpp Hello.cpp
+```shell
+c++ -o CallHello CallHello.cpp Hello.cpp
 ```
 
 2. L'exécutable nommé `CallHello` a été créé, il est visible dans le répertoire courant, il peut 
 être exécuté ainsi :
-```sh
-      ./CallHello
+```shell
+./CallHello
 ```
 
 3. Si une erreur est détectée par le compilateur, l'étape d'édition de liens n'est pas effectuée ; 
 par exemple, supprimer l'exécutable actuel : 
-```sh
-     rm CallHello
+```shell
+rm CallHello
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modifier temporairement dans le fichier 
+&nbsp;&nbsp;modifier temporairement dans le fichier 
 [Hello.cpp](Hello.cpp) la ligne 
-```C
-     #include "Hello.hpp"
+```cpp
+#include "Hello.hpp"
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;par
-```C
-     #include "Hello.hpp1"
+&nbsp;&nbsp;par
+```cpp
+#include "Hello.hpp1"
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;et relancer la commande ci-dessus. 
+&nbsp;&nbsp;et relancer la commande ci-dessus. 
 L'erreur est affichée, et l'exécutable n'est pas créé. Annuler la modification faite.
 
 ### Séparation de l'étape de l'édition de liens
 1. Exécution sur les 2 fichiers source du préprocesseur, puis du compilateur ; l'option `-c` indique de 
 ne pas faire l'étape d'édition de liens, donc les fichiers objets résultant de la compilation, 
 `CallHello.o` et `Hello.o` sont conservés et présents dans le répertoire :
-```sh
-      c++ -c CallHello.cpp Hello.cpp
+```shell
+c++ -c CallHello.cpp Hello.cpp
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Il est possible de le faire en 2 étapes, 
+&nbsp;&nbsp;Il est possible de le faire en 2 étapes, 
 une pour chaque fichier.
 
 2. Exécution sur les 2 fichiers objets de l'éditeur de liens :
-```sh
-      c++ -o CallHello CallHello.o Hello.o
+```shell
+c++ -o CallHello CallHello.o Hello.o
 ```
 
 ### Observation du résultat du préprocesseur
 1. L'option `-E` permet de n'exécuter que l'étape du préprocesseur, le résultat s'affiche sur la sortie 
 standard :
-```sh
-      c++ -E Hello.cpp
+```shell
+c++ -E Hello.cpp
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On voit tout à la fin le contenu du 
+&nbsp;&nbsp;On voit tout à la fin le contenu du 
 fichier [Hello.cpp](Hello.cpp) sans les commentaires et où la ligne 
-```C
-     #include "Hello.hpp"
+```cpp
+#include "Hello.hpp"
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a été remplacée par le contenu de ce fichier :
-```C
-     void hello();
+&nbsp;&nbsp;a été remplacée par le contenu de ce fichier :
+```cpp
+void hello();
 ```
