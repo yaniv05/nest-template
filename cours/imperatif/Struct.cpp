@@ -1,7 +1,7 @@
 /*
  * Cursus CentraleSupélec - Dominante Informatique et numérique
  * 3IF1020 - Concepts des langages de programmation - Chapitre n°2
- * Dominique Marcadet - 2022 - CC BY-SA
+ * Dominique Marcadet - 2022-23 - CC BY-SA
  *
  * Struct.cpp
  *
@@ -12,6 +12,7 @@
  */
 
 #include <iostream>
+#include <string>
 
 enum class Sexe { Homme, Femme };
 // Énumération issue de C :
@@ -30,6 +31,8 @@ int main()
     Personne p1;
     // En C :
     // struct Personne p1;
+    // Sauf si on dit que Personne est la même chose que struct Personne avec
+    // typedef struct Personne Personne;
     p1.nom_ = "Paul";
     p1.sexe_ = Sexe::Homme;
     // Avec l'énumération C :
@@ -37,7 +40,9 @@ int main()
     p1.age_ = 23;
     std::cout << p1.nom_ << " a " << p1.age_ << " ans\n";
     
-    Personne p2{ "Anne", Sexe::Femme, 34 };
-    Personne * pp = &p2;
-    std::cout << (*pp).nom_ << " a " << pp->age_ << " ans\n";    
+    // Allocation dynamique possible
+    Personne * p2 = new Personne{ "Anne", Sexe::Femme, 34 };
+    // L'opérateur -> permet d'éviter les parenthèses
+    std::cout << (*p2).nom_ << " a " << p2->age_ << " ans\n";
+    delete p2;
 }

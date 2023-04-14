@@ -1,7 +1,7 @@
 /*
  * Cursus CentraleSupélec - Dominante Informatique et numérique
  * 3IF1020 - Concepts des langages de programmation - Chapitre n°2
- * Dominique Marcadet - 2022 - CC BY-SA
+ * Dominique Marcadet - 2022-23 - CC BY-SA
  *
  * Array_2.cpp
  *
@@ -41,6 +41,11 @@ void print_tab_2( Tab tab )
 int main()
 {
     Tab tab_1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    // Un std::vector peut changer de taille, donc les éléments sont stockés
+    // dans un bloc mémoire alloué dynamiquement
+    // 1 pointeur et 2 entiers (taille du tableau, taille du bloc mémoire qui peut
+    // être plus grand) sont mémorisés
+    std::cout << "sizeof( tab_1 ) = " << sizeof( tab_1 ) << "\n";
     print_tab_1( tab_1 );
     print_tab_2( tab_1 );
     
@@ -55,5 +60,6 @@ int main()
     std::cout << "tab_1[11] = " << tab_1[11] << "\n";
     
     // Sauf en utilisant cette notation
-    std::cout << "tab_1.at( -1 ) = " << tab_1.at( -1 ) << "\n";
+    // Un exception sera émise si vous décommentez cette ligne
+    //std::cout << "tab_1.at( -1 ) = " << tab_1.at( -1 ) << "\n";
 }

@@ -1,7 +1,7 @@
 /*
  * Cursus CentraleSupélec - Dominante Informatique et numérique
  * 3IF1020 - Concepts des langages de programmation - Chapitre n°2
- * Dominique Marcadet - 2022 - CC BY-SA
+ * Dominique Marcadet - 2022-23 - CC BY-SA
  *
  * Allocation.cpp
  *
@@ -31,11 +31,14 @@ void foo()
 
     ++globale; ++automatique; ++*dynamique; ++statique;
     
+    // automatique et *dynamique sont recréés à chaque appel de foo()
     std::cout << "automatique = " << automatique << "\n";
     std::cout << "*dynamique = " << *dynamique << "\n";
+    // statique conserve sa valeur d'un appel de foo() à l'autre
     std::cout << "statique = " << statique << "\n";
     
-    // Sans cette instruction, fuite de mémoire;
+    // Sans cette instruction, fuite de mémoire
+    // Commenter cette ligne et lancer l'exécutable via valgrind
     delete dynamique;
     // Destruction de automatique après la sortie de foo()
 }
@@ -52,9 +55,16 @@ void bar()
 int main()
 {
     std::cout << "globale = " << globale << "\n";
+    std::cout << "Premier appel de foo()\n";
     foo();
+    std::cout << "Second appel de foo()\n";
     foo();
+    // globale aura été incrémentée 2 fois
     std::cout << "globale = " << globale << "\n";
+    
+    // La commande ulimit a limité la taille maximale du tas
+    // En décommentant l'appel à bar(), il y aura une erreur à l'exécution quand le tas sera épuisé
+    // Le lancement de l'exécutable via valgrind montre la fuite de mémoire
     //bar();
 }
 
