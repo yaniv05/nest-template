@@ -1,6 +1,6 @@
 /*
  * Cursus CentraleSupélec - Dominante Informatique et numérique
- * 3IF1020 - Concepts des langages de programmation - Chapitre n°4
+ * 3IF1020 - Concepts des langages de programmation - Chapitre n°5
  * Dominique Marcadet - 2022 - CC BY-SA
  *
  * Pile_v7.cpp

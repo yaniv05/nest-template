@@ -1,7 +1,7 @@
 /*
  * Cursus CentraleSupélec - Dominante Informatique et numérique
  * 3IF1020 - Concepts des langages de programmation - Chapitre n°3
- * Dominique Marcadet - 2022 - CC BY-SA
+ * Dominique Marcadet - 2022-23 - CC BY-SA
  *
  * Recursion.cpp
  *
@@ -23,7 +23,7 @@ int longueur_tableau_iteratif( int tab[] ) {
 }
 
 int longueur_tableau_recursif( int tab[] ) {
-    if( tab[0] == 0) {
+    if( tab[0] == 0 ) {
         return 0;
     }
     return 1 + longueur_tableau_recursif( tab + 1 );
