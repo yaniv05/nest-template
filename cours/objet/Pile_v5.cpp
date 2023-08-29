@@ -17,13 +17,23 @@
 #include <stdexcept>
 #include <utility>
 
+//#define USE_CONST_MEMBERS
+
+#ifdef USE_CONST_MEMBERS
+#define CONST const
+#else
+#define CONST
+#endif
+
 class  Pile {
 public:
         Pile( unsigned int taille = 100 );
         ~Pile();
         Pile( const Pile & p );
-        //Pile & operator=( const Pile & p );
-        //void swap( Pile & p );
+#ifndef USE_CONST_MEMBERS
+        Pile & operator=( const Pile & p );
+        void swap( Pile & p );
+#endif
         
         void     empile( double v );
         double   depile();
@@ -31,20 +41,12 @@ public:
         bool     est_vide() const;
 
 private:
-        unsigned int const taille_;
-        double * const tab_;
+        unsigned int CONST taille_;
+        double * CONST tab_;
         unsigned int index_;
 };
 
-/*
-Pile::Pile( unsigned int taille )
-{
-    taille_ = taille;
-    tab_ = new double[taille_];
-    index_ = 0;
-}
-*/
-
+#ifdef USE_CONST_MEMBERS
 Pile::Pile( unsigned int taille )
     : taille_{ taille }
     , tab_{ new double[taille_] }
@@ -52,8 +54,28 @@ Pile::Pile( unsigned int taille )
 {
     std::cout << "Constructeur\n";
 }
+#else
+Pile::Pile( unsigned int taille )
+{
+    taille_ = taille;
+    tab_ = new double[taille_];
+    index_ = 0;
+    std::cout << "Constructeur\n";
+}
+#endif
 
-/*
+#ifdef USE_CONST_MEMBERS
+Pile::Pile( const Pile & p )
+    : taille_{ p.taille_ }
+    , tab_{ new double[p.taille_] }
+    , index_{ p.index_ }
+{
+    std::cout << "Constructeur de copie\n";
+    for( unsigned int i{ 0 }; i < p.index_; ++i ) {
+        tab_[i] = p.tab_[i];
+    }
+}
+#else
 Pile::Pile( const Pile & p )
 {
     std::cout << "Constructeur de copie\n";
@@ -64,19 +86,9 @@ Pile::Pile( const Pile & p )
         tab_[i] = p.tab_[i];
     }
 }
-*/
+#endif
 
-Pile::Pile( const Pile & p )
-    : taille_{ p.taille_ }
-    , tab_{ new double[p.taille_] }
-    , index_{ p.index_ }
-{
-    for( unsigned int i{ 0 }; i < p.index_; ++i ) {
-        tab_[i] = p.tab_[i];
-    }
-}
-
-/*
+#ifndef USE_CONST_MEMBERS
 void Pile::swap( Pile & p )
 {
     using std::swap;
@@ -91,7 +103,7 @@ Pile & Pile::operator=( const Pile & p )
     swap( tmp );
     return *this;
 }
-*/
+#endif
 
 bool Pile::est_vide() const
 {
@@ -120,8 +132,10 @@ int main()
     Pile p1{ 10 };
     p1.empile( 5 );
     
-    //Pile p2( p1 );
-    //p2 = p1;
+    Pile p2( p1 );
+#ifndef USE_CONST_MEMBERS
+    p2 = p1;
+#endif
 
     const Pile p3{ 10 };
     // p3.empile( 3 );
