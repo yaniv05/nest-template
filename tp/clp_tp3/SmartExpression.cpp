@@ -2,21 +2,16 @@
  * Cursus CentraleSupélec - Dominante Informatique et numérique
  * 3IF1020 - Concepts des langages de programmation - TP n°3
  *
- * Expression.hpp
+ * SmartExpression.cpp
  */
-
-#ifndef EXPRESSION_HPP_INCLUDED
-#define EXPRESSION_HPP_INCLUDED
 
 #include <iostream>
 #include <string>
 #include <utility>
 #include <memory>
 
-class Expression {
-public:
-    // TODO
-private:
-};
+#include "SmartExpression.hpp"
 
-#endif
+
+
+
