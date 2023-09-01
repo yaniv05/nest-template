@@ -7,11 +7,18 @@
  *
  * Compilation :
  *     c++ -std=c++20 -o Factorial Factorial.cpp
+ *     c++ -std=c++20 -S Factorial.cpp
+ *     c++ -std=c++20 -O3 -S Factorial.cpp
  * Exécution :
  *     ./Factorial
  */
 
 #include <iostream>
+#include <cstdlib>
+
+#define USE_TEMPLATE
+
+#ifdef USE_TEMPLATE
 
 template< unsigned N >
 struct Factorial {
@@ -24,11 +31,30 @@ struct Factorial< 0 > {
     static constexpr unsigned value{ 1 };
 };
 
+#else
+
+constexpr unsigned factorial( unsigned value )
+//consteval unsigned factorial( unsigned value )
+{
+    if( value <= 1 ) return 1;
+    return value * factorial( value - 1 );
+}
+
+#endif
 
 int main()
 {
-    std::cout << "Factorial< 0 > = " << Factorial< 0 >::value << "\n";
+    unsigned i{ std::rand() % 10u };
+#ifdef USE_TEMPLATE
+    std::cout << "Factorial< 0 >  = " << Factorial< 0  >::value << "\n";
     std::cout << "Factorial< 13 > = " << Factorial< 13 >::value << "\n";
     std::cout << "Factorial< 14 > = " << Factorial< 14 >::value << "\n";
+    //std::cout << "Factorial< " << i << " > = " << Factorial< i > << "\n";
+#else
+    std::cout << "factorial( 0 )  = " << factorial( 0 )  << "\n";
+    std::cout << "factorial( 13 ) = " << factorial( 13 ) << "\n";
+    std::cout << "factorial( 14 ) = " << factorial( 14 ) << "\n";
+    std::cout << "factorial( " << i << " ) = " << factorial( i ) << "\n";
+#endif
 }
 

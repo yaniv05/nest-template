@@ -1,14 +1,14 @@
 /*
  * Cursus CentraleSupélec - Dominante Informatique et numérique
  * 3IF1020 - Concepts des langages de programmation - Chapitre n°6
- * Dominique Marcadet - 2022 - CC BY-SA
+ * Dominique Marcadet - 2023 - CC BY-SA
  *
- * sac.cpp
+ * Ranges.cpp
  *
  * Compilation :
- *     g++ -std=c++20 -o ranges ranges.cpp
+ *     g++ -std=c++20 -o Ranges Ranges.cpp
  * Exécution :
- *     ./ranges
+ *     ./Ranges
  */
 
 

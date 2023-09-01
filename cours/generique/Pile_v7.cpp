@@ -1,7 +1,7 @@
 /*
  * Cursus CentraleSupélec - Dominante Informatique et numérique
  * 3IF1020 - Concepts des langages de programmation - Chapitre n°5
- * Dominique Marcadet - 2022 - CC BY-SA
+ * Dominique Marcadet - 2022-23 - CC BY-SA
  *
  * Pile_v7.cpp
  *
@@ -64,11 +64,10 @@ int main()
     Pile< double, 10 > p1;
     p1.empile( 5 );
     
-    Pile< int, 10 > p2;
-    //p2 = p1;
-    
-    Pile< double, 11 > p3;
-    //p3 = p1;
+    //Pile< double, 11 > p2{ p1 };
+
+    Pile< int, 10 > p3;
+    //p1 = p3;
     
     Pile< double, 10 > p4;
     p4 = p1;

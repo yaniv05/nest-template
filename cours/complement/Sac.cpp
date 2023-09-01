@@ -1,14 +1,14 @@
 /*
  * Cursus CentraleSupélec - Dominante Informatique et numérique
  * 3IF1020 - Concepts des langages de programmation - Chapitre n°6
- * Dominique Marcadet - 2022 - CC BY-SA
+ * Dominique Marcadet - 2022-23 - CC BY-SA
  *
- * sac.cpp
+ * Sac.cpp
  *
  * Compilation :
- *     c++ -std=c++20 -o sac sac.cpp
+ *     c++ -std=c++20 -o Sac Sac.cpp
  * Exécution :
- *     ./sac
+ *     ./Sac
  */
 
 
@@ -29,18 +29,18 @@ int main()
     std::vector< Pomme > sp{ Pomme{ "p1" } };
     //sf = sp;
 
-    auto print = [](const Fruit * f) { std::cout << f->nom_ << " "; };
+    auto print = []( const Fruit * f ) { std::cout << f->nom_ << " "; };
 
     std::vector< Fruit * > spf{ new Fruit{ "f1" }, new Pomme{ "p1" }};
-    std::for_each( std::begin( spf ), std::end( spf ), print );
+    std::ranges::for_each( spf, print );
     std::cout << '\n';
     
     std::vector< Pomme * > spp{ new Pomme{ "p2" }, new Pomme{ "p3" }};
-    std::for_each( std::begin( spp ), std::end( spp ), print );
+    std::ranges::for_each( spp, print );
     std::cout << '\n';
     //spf = spp;
     std::copy( spp.begin(), spp.end(), std::back_inserter( spf ));
-    std::for_each( std::begin( spf ), std::end( spf ), print );
+    std::ranges::for_each( spf, print );
     std::cout << '\n';
 
     std::shared_ptr< Fruit > pf{ new Fruit{} };

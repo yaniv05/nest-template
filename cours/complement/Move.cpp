@@ -1,14 +1,14 @@
 /*
  * Cursus CentraleSupélec - Dominante Informatique et numérique
  * 3IF1020 - Concepts des langages de programmation - Chapitre n°6
- * Dominique Marcadet - 2022 - CC BY-SA
+ * Dominique Marcadet - 2022-23 - CC BY-SA
  *
- * move.cpp
+ * Move.cpp
  *
  * Compilation :
- *     c++ -std=c++20 -o move move.cpp
+ *     c++ -std=c++20 -o Move Move.cpp
  * Exécution :
- *     ./move
+ *     ./Move
  */
 
 
