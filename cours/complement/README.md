@@ -10,6 +10,7 @@
 - [SmartPointer.cpp](SmartPointer.cpp) : pointeurs intelligents.
 - [New.cpp](New.cpp) : surcharge de new.
 - [Ranges.cpp](Ranges.cpp) : démonstration des ranges et views.
+- [Fibonacci.cpp](Fibonacci.cpp) : démonstration d'une view générant ses valeurs.
 - [Sac.cpp](Sac.cpp) : Une histoire de sacs.
 
 ## Démonstrations
