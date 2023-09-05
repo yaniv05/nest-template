@@ -6,7 +6,7 @@
  *
  * Using library https://github.com/andreasbuhr/cppcoro
  *
- * c++ -std=c++20 Coroutine.cpp -o Coroutine
+ * c++ -std=c++20 Coroutine.cpp -o Coroutine -lcppcoro
  * ./Coroutine
  */
 

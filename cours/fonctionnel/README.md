@@ -10,6 +10,8 @@
   récursive (fonctionnelle, sans effet de bord) d'une même fonction.
 - [Arguments.cpp](Arguments.cpp) : démonstration des différents modes de passage d'arguments.
 - [Lambda.cpp](Lambda.cpp) : démonstration de l'utilisation de fonctions anonymes.
+- [Coroutine.cpp](Coroutine.cpp) : démonstration d'une coroutine.
+- [Fibonacci.cpp](Fibonacci.cpp) : démonstration d'un générateur.
 
 ## Démonstrations
 
