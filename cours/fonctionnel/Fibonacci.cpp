@@ -1,10 +1,10 @@
 /*
  * Cursus CentraleSupélec - Dominante Informatique et numérique
  * 3IF1020 - Concepts des langages de programmation - Chapitre n°3
- * 
- * Example from https://github.com/andreasbuhr/cppcoro
- *
  * Fibonacci.cpp
+ *
+ * Using library https://github.com/andreasbuhr/cppcoro
+ * Example from this library
  *
  * c++ -std=c++20 Fibonacci.cpp -o Fibonacci
  * ./Fibonacci
