@@ -38,6 +38,8 @@ cours/imperatif/Reference
 cours/fonctionnel/Recursion
 cours/fonctionnel/Arguments
 cours/fonctionnel/Lambda
+cours/fonctionnel/Coroutine
+cours/fonctionnel/Fibonacci
 cours/objet/Pile_v1
 cours/objet/Pile_v2
 cours/objet/Pile_v3
@@ -51,11 +53,12 @@ cours/generique/Pile_v8
 cours/generique/Factorial
 cours/generique/Factorial.s
 cours/generique/Algo
-cours/complement/move
-cours/complement/smart_pointer
-cours/complement/new
-cours/complement/ranges
-cours/complement/sac
+cours/complement/Move
+cours/complement/SmartPointer
+cours/complement/New
+cours/complement/Ranges
+cours/complement/Fibonacci
+cours/complement/Sac
 td/td1
 td/td2
 tp/clp_tp1/tris
