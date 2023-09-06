@@ -81,7 +81,7 @@ void foo5()
   }
 
   std::cout << "foo5  : ";
-  for( auto & p : tab ) std::cout << p << " ";
+  for( auto p : tab ) std::cout << p << " ";
   std::cout << "\n";
 }
 
@@ -98,7 +98,7 @@ void foo6()
   mettre_a_1( tab );
 
   std::cout << "foo6  : ";
-  for( auto & p : tab ) std::cout << p << " ";
+  for( auto p : tab ) std::cout << p << " ";
   std::cout << "\n";
 }
 
@@ -118,7 +118,7 @@ void foo7()
               std::end  ( tab ));
 
   std::cout << "foo7  : ";
-  for( auto & p : tab ) std::cout << p << " ";
+  for( auto p : tab ) std::cout << p << " ";
   std::cout << "\n";
 }
 
@@ -138,7 +138,7 @@ void foo8()
                 std::end  ( tab ), 1 );
 
   std::cout << "foo8  : ";
-  for( auto & p : tab ) std::cout << p << " ";
+  for( auto p : tab ) std::cout << p << " ";
   std::cout << "\n";
 }
 
@@ -158,7 +158,7 @@ void foo9()
          std::end  ( tab ), &mettre_a_1_bis );
 
   std::cout << "foo9  : ";
-  for( auto & p : tab ) std::cout << p << " ";
+  for( auto p : tab ) std::cout << p << " ";
   std::cout << "\n";
 }
 
@@ -178,7 +178,7 @@ void foo10()
          std::end  ( tab ), mettre_a_val_bis( 1 ));
 
   std::cout << "foo10 : ";
-  for( auto & p : tab ) std::cout << p << " ";
+  for( auto p : tab ) std::cout << p << " ";
   std::cout << "\n";
 }
 
