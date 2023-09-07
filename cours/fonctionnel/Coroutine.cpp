@@ -14,7 +14,6 @@
 #include <coroutine>
 
 #include <cppcoro/task.hpp>
-#include <cppcoro/sync_wait.hpp>
 
 cppcoro::task<> counter()
 {
