@@ -24,18 +24,12 @@ cppcoro::task<> counter()
     }
 }
 
-cppcoro::task<> co_main()
-{
-    auto my_counter{ counter() };
-    std::cout << "co_main: resuming counter\n";
-    my_counter.when_ready().m_coroutine.resume();
-    std::cout << "co_main: resuming counter\n";
-    my_counter.when_ready().m_coroutine.resume();
-    co_return;
-}
-
 int main()
 {
-    cppcoro::sync_wait( co_main() );
+    auto my_counter{ counter() };
+    std::cout << "main: resuming counter\n";
+    my_counter.when_ready().m_coroutine.resume();
+    std::cout << "main: resuming counter\n";
+    my_counter.when_ready().m_coroutine.resume();
 }
 
