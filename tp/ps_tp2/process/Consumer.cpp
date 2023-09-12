@@ -11,16 +11,17 @@
 
 #include <boost/interprocess/shared_memory_object.hpp>
 #include <boost/interprocess/mapped_region.hpp>
+#include <boost/interprocess/sync/named_semaphore.hpp>
 
 #include "../Random.hpp"
+#include "../ProdOrCons.hpp"
 
-#include "ProdOrCons.hpp"
 #include "MessageBox.hpp"
 
 /*
  * Consommateur de messages
  */
-class Consumer : public ProdOrCons {
+class Consumer : public ProdOrCons< MessageBox > {
 public:
     // Le constructeur de ProdOrCons sera utilisé comme constructeur de Consumer
     using ProdOrCons::ProdOrCons;
@@ -37,7 +38,8 @@ int main()
 {
     using namespace boost::interprocess;
 
-    // TODO : accéder à la mémoire partagée, la projeter en mémoire,
+    // TODO : attendre que le producteur ait signalé que la boîte
+    // est prête, accéder à la mémoire partagée, la projeter en mémoire,
     // y accéder comme boîte à lettres, lancer le consommateur
     
     return 0;

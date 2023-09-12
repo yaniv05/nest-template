@@ -15,8 +15,6 @@
 
 #include <array>
 #include <algorithm>
-#include <mutex>
-#include <condition_variable>
 
 /*
  * FIFO d'echange de messages entre producteurs et consommateurs
@@ -44,8 +42,10 @@ public:
         get_index_ = ( get_index_ + 1 ) % box_size_;
         return message;
     }
+
 protected:
     static const unsigned box_size_ = 2;
+
 private:
     // FIFO réalisée par un tableau géré en tampon circulaire via 2 indices (dépôt et retrait).
     // Les 2 indices sont privés : c'est volontaire, vous ne devez pas les utiliser pour savoir

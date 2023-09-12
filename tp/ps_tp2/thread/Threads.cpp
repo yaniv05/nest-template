@@ -7,13 +7,12 @@
  */
 
 #include <iostream>
-#include <sstream>
 #include <thread>
  
  
 #include "../Random.hpp"
-#include "../osyncstream.hpp"
 
+#include "osyncstream.hpp"
 #include "Producer.hpp"
 #include "Consumer.hpp"
 #include "MessageBox.hpp"
@@ -31,6 +30,9 @@ void one_producer_one_consumer() {
  
 }
 
+/*
+ * Test avec plusieurs producteurs et consommateurs
+ */
 void several_producers_and_consumers() {
     // TODO :
     // - Créer un générateur de nombres aléatoires

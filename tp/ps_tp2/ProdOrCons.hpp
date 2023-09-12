@@ -13,13 +13,14 @@
 
 ********************************************************************/
 
-#include "../Random.hpp"
+#include "Random.hpp"
 
-#include "MessageBox.hpp"
 
+// Le type de la boîte à lettres est un paramètre de généricité
+template< typename MB >
 class ProdOrCons {
 public:
-    ProdOrCons( unsigned name, MessageBox & box, Random & engine, unsigned nb_messages )
+    ProdOrCons( unsigned name, MB & box, Random & engine, unsigned nb_messages )
         : name_(name)
         , box_( box )
         , random_engine_( engine )
@@ -32,9 +33,9 @@ public:
  
 protected:
     // nom sous la forme d'un entier
-    unsigned name_;
+    const unsigned name_;
     // FIFO où écrire/lire les messages
-    MessageBox & box_;
+    MB & box_;
     // générateur de nombres aléatoires
     Random & random_engine_;
     // nombre de messages à produire ou lire

@@ -10,14 +10,16 @@
 #include <iostream>
 #include <thread>
 
-#include "../osyncstream.hpp"
-
-#include "ProdOrCons.hpp"
+#include "../ProdOrCons.hpp"
  
+#include "osyncstream.hpp"
+#include "MessageBox.hpp"
+
+
 /*
  * Consommateur de messages
  */
-class Consumer : public ProdOrCons {
+class Consumer : public ProdOrCons< MessageBox > {
 public:
     // Le constructeur de ProdOrCons sera utilisé comme constructeur de Consumer
     using ProdOrCons::ProdOrCons;
