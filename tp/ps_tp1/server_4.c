@@ -7,8 +7,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <unistd.h>
 #include <signal.h>
+#include <stdbool.h>
 
 pid_t child_pid;
 int pipe_fd[2];
@@ -28,6 +30,9 @@ void exit_message(void) {
 }
 
 int main() {
+    // Initialisation du générateur de nombres aléatoires
+    srand(time(NULL));
+
     struct sigaction sa;
     sa.sa_handler = stop_handler;
     sa.sa_flags = 0;
@@ -38,9 +43,22 @@ int main() {
     sigemptyset(&sa_child.sa_mask);
     sa_child.sa_flags = 0;
 
-    sigaction(SIGINT, &sa, NULL);
-    sigaction(SIGTERM, &sa, NULL);
-    sigaction(SIGCHLD, &sa_child, NULL);
+    //Gestion de SIGINT
+    if (sigaction(SIGINT, &sa, NULL) == -1) {
+        perror("Erreur lors de l'installation du gestionnaire pour SIGINT");
+        exit(EXIT_FAILURE);
+    }
+
+    //Gestion de SIGTERM
+    if (sigaction(SIGTERM, &sa, NULL) == -1) {
+        perror("Erreur d'installation du gestionnaire pour SIGTERM");
+        exit(EXIT_FAILURE);
+    }
+    //Gestion de SIGCHLD
+    if (sigaction(SIGCHLD, &sa_child, NULL) == -1) {
+        perror("Erreur d'installation du gestionnaire pour SIGCHLD");
+        exit(EXIT_FAILURE);
+    }
 
     if (pipe(pipe_fd) == -1) {
         perror("Erreur lors de la création du tube");
@@ -48,6 +66,14 @@ int main() {
     }
 
     child_pid = fork();
+
+    //Message en fin de programme
+    if (atexit(exit_message) != 0) {
+        perror("Erreur d'installation de la fonction exit_message");
+        exit(EXIT_FAILURE);
+    }
+    //Affichage du premier message
+    printf("[%s] TP1 : Hello World \n", (getpid() != child_pid) ? "Père" : "Fils");
 
     if (child_pid == 0) {  // Fils
         close(pipe_fd[1]);  // ferme l'extrémité d'écriture du tube
@@ -60,9 +86,9 @@ int main() {
         close(pipe_fd[0]);  // ferme l'extrémité de lecture du tube
         int number_to_send = 1;
         while (1) {
+            number_to_send =  rand() % 100;
             printf("[Père] Envoyé: %d\n", number_to_send);
             write(pipe_fd[1], &number_to_send, sizeof(int));
-            number_to_send++;
             sleep(1);
         }
         close(pipe_fd[1]);
@@ -73,3 +99,13 @@ int main() {
 
     return EXIT_SUCCESS;
 }
+/*
+Les processus s'arrêtent bien avec un CTRL C ou un kill sur le père ou sur le fils  
+
+Lorsqu'on arrête le père en premier on obtient : 
+[Père] Signal 15 reçu. Arrêt en cours...
+
+Lorsqu'on arrête le fils en premier on obtient : 
+[Père] Signal 15 reçu. Arrêt en cours...
+[Père] Le fils a terminé. Arrêt en cours...
+*/

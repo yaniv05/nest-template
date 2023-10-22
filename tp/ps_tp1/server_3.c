@@ -54,7 +54,6 @@ int main()
     sa_child.sa_handler = child_exit_handler;
     sigemptyset(&sa_child.sa_mask);
     sa_child.sa_flags = 0;
-    sigaction(SIGCHLD, &sa_child, NULL);
 
     //Gestion de SIGINT
     if (sigaction(SIGINT, &sa, NULL) == -1) {
@@ -65,6 +64,12 @@ int main()
     //Gestion de SIGTERM
     if (sigaction(SIGTERM, &sa, NULL) == -1) {
         perror("Erreur d'installation du gestionnaire pour SIGTERM");
+        exit(EXIT_FAILURE);
+    }
+
+    //Gestion de SIGCHLD
+    if (sigaction(SIGCHLD, &sa_child, NULL) == -1) {
+        perror("Erreur d'installation du gestionnaire pour SIGCHLD");
         exit(EXIT_FAILURE);
     }
 
