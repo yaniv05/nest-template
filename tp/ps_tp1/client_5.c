@@ -5,3 +5,50 @@
  * client_5.c
  */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <signal.h>
+#include <fcntl.h>
+
+void stop_handler(int sig) {
+    printf("[Client] Signal %d reçu. Arrêt en cours...\n", sig);
+    exit(EXIT_SUCCESS);
+}
+
+int main() {
+
+    struct sigaction sa;
+    sa.sa_handler = stop_handler;
+    sa.sa_flags = 0;
+    sigemptyset(&sa.sa_mask);
+
+    if (sigaction(SIGINT, &sa, NULL) == -1) {
+        perror("Erreur lors de l'installation du gestionnaire pour SIGINT");
+        exit(EXIT_FAILURE);
+    }
+
+    if (sigaction(SIGTERM, &sa, NULL) == -1) {
+        perror("Erreur d'installation du gestionnaire pour SIGTERM");
+        exit(EXIT_FAILURE);
+    }
+
+
+    int fifo_fd = open("fifo", O_RDONLY);
+    if (fifo_fd == -1) {
+        perror("Erreur lors de l'ouverture de la fifo en lecture");
+        exit(EXIT_FAILURE);
+    }
+
+    int received_number;
+    while (read(fifo_fd, &received_number, sizeof(int)) > 0) {
+        printf("[Client] Reçu: %d\n", received_number);
+    }
+
+    close(fifo_fd);
+    return EXIT_SUCCESS;
+}
+/*
+Lorsqu'on arrête un des deux processus l'autre s'arête aussi
+*/
+
