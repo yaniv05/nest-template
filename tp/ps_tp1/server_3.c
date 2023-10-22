@@ -81,11 +81,13 @@ int main()
     if (child_pid == 0) {  // Fils
         while (running) {
             printf("[Fils] PID: %d, PPID: %d, PGID: %d\n", getpid(), getppid(), getpgid(0));
+            printf("Nombre aléatoire entre 0 et 99 : %d\n", rand() % 100);
             sleep(1);
         }
     } else if (child_pid > 0) {  // Père
         while (running) {
             printf("[Père] PID: %d, PPID: %d, PGID: %d\n", getpid(), getppid(), getpgid(0));
+            printf("Nombre aléatoire entre 0 et 99 : %d\n", rand() % 100);
             sleep(1);
         }
     } else {
