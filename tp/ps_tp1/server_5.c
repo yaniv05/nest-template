@@ -17,6 +17,10 @@ void stop_handler(int sig) {
     exit(EXIT_SUCCESS);
 }
 
+void exit_message(void) {
+    printf("[SERVEUR] Message à la fin du programme.\n");
+}
+
 int main() {
     // Initialisation du générateur de nombres aléatoires
     srand(time(NULL));
@@ -44,7 +48,14 @@ int main() {
         perror("Erreur lors de l'ouverture de la fifo en écriture");
         exit(EXIT_FAILURE);
     }
-
+    //Message en fin de programme
+    if (atexit(exit_message) != 0) {
+        perror("Erreur d'installation de la fonction exit_message");
+        exit(EXIT_FAILURE);
+    }
+    
+    //Affichage du premier message
+    printf("[SERVEUR] TP1 : Hello World \n");
    
     while (1) {
         number_to_send =  rand() % 100;
@@ -52,6 +63,8 @@ int main() {
         write(fifo_fd, &number_to_send, sizeof(int));
         sleep(1);
     }
+
+
 
     close(fifo_fd);
     return EXIT_SUCCESS;

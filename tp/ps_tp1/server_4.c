@@ -67,11 +67,6 @@ int main() {
 
     child_pid = fork();
 
-    //Message en fin de programme
-    if (atexit(exit_message) != 0) {
-        perror("Erreur d'installation de la fonction exit_message");
-        exit(EXIT_FAILURE);
-    }
     //Affichage du premier message
     printf("[%s] TP1 : Hello World \n", (getpid() != child_pid) ? "Père" : "Fils");
 
@@ -94,6 +89,12 @@ int main() {
         close(pipe_fd[1]);
     } else {
         perror("Erreur avec fork");
+        exit(EXIT_FAILURE);
+    }
+    
+    //Message en fin de programme
+    if (atexit(exit_message) != 0) {
+        perror("Erreur d'installation de la fonction exit_message");
         exit(EXIT_FAILURE);
     }
 

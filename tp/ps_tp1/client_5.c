@@ -16,6 +16,10 @@ void stop_handler(int sig) {
     exit(EXIT_SUCCESS);
 }
 
+void exit_message(void) {
+    printf("[CLIENT] Message à la fin du programme.\n");
+}
+
 int main() {
 
     struct sigaction sa;
@@ -39,6 +43,15 @@ int main() {
         perror("Erreur lors de l'ouverture de la fifo en lecture");
         exit(EXIT_FAILURE);
     }
+
+    //Message en fin de programme
+    if (atexit(exit_message) != 0) {
+        perror("Erreur d'installation de la fonction exit_message");
+        exit(EXIT_FAILURE);
+    }
+
+    //Affichage du premier message
+    printf("[SERVEUR] TP1 : Hello World \n");
 
     int received_number;
     while (read(fifo_fd, &received_number, sizeof(int)) > 0) {
