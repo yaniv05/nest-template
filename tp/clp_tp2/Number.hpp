@@ -38,6 +38,25 @@ public:
         }
     }
 
+
+    // Constructeur de copie
+    Number(const Number& other)
+        : first_(nullptr)
+    {
+        copyDigitsFrom(other.first_);
+    }
+
+    // Opérateur d'affectation par copie
+    Number& operator=(const Number& other) {
+        if (&other == this) {
+            return *this;
+        }
+        deleteDigits(first_);
+        first_ = nullptr;
+        copyDigitsFrom(other.first_);
+        return *this;
+    }
+
 private:
     using DigitType = unsigned int;
     static const DigitType number_base{ 10u };
@@ -72,6 +91,25 @@ private:
             deleteDigits(current->next_);
             delete current;
         }
+    }
+
+    void copyDigitsFrom(const Digit* source) {
+        if (source) {
+            addDigitToEnd(source->digit_);
+            copyDigitsFrom(source->next_);
+        }
+    }
+
+    void addDigitToEnd(DigitType d) {
+        if (!first_) {
+            first_ = new Digit(d);
+            return;
+        }
+        Digit* current = first_;
+        while (current->next_) {
+            current = current->next_;
+        }
+        current->next_ = new Digit(d);
     }
 
     Digit * first_;

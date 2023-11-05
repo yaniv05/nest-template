@@ -53,6 +53,41 @@ TEST( TestNumber, TestNumberRandom )
     EXPECT_EQ( os.str(), std::to_string( r ));
 }
 
+TEST(TestNumber, CopyConstructor) {
+    Number original(12345);
+    Number copy(original);
+
+    std::ostringstream os1, os2;
+    os1 << original;
+    os2 << copy;
+    
+    EXPECT_EQ(os1.str(), "12345");
+    EXPECT_EQ(os2.str(), os1.str());
+}
+
+TEST(TestNumber, CopyAssignmentOperator) {
+    Number original(67890);
+    Number assigned(12345);
+    assigned = original;
+
+    std::ostringstream os1, os2;
+    os1 << original;
+    os2 << assigned;
+
+    EXPECT_EQ(os1.str(), "67890");
+    EXPECT_EQ(os2.str(), os1.str());
+}
+
+TEST(TestNumber, SelfAssignment) {
+    Number number(98765);
+    number = number;
+
+    std::ostringstream os;
+    os << number;
+    
+    EXPECT_EQ(os.str(), "98765");
+}
+
 int main( int argc, char * argv[] )
 {
     std::srand( std::time( nullptr ));
