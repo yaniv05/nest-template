@@ -30,6 +30,22 @@ public:
         //   chaque retrait.
         // - Afficher des messages entre chaque étape pour suivre l'avancement.
         // - Afficher un message d'erreur si un nombre négatif est extrait.
+        for (unsigned i = 0; i < nb_messages_; ++i) {
+            // Attente aléatoire avant de retirer le message
+            std::this_thread::sleep_for(std::chrono::milliseconds(random_engine_()));
+
+            {
+                osyncstream{ std::cout } << "Consumer " << name_ << " trying to fetch message\n";
+            }
+
+            int message = box_.get();
+
+            if (message < 0) {
+                osyncstream{ std::cout } << "Consumer " << name_ << " found an error: negative message\n";
+            } else {
+                osyncstream{ std::cout } << "Consumer " << name_ << " has fetched message: " << message << "\n";
+            }
+        }
     }
 };
 

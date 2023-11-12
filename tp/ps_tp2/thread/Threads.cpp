@@ -27,8 +27,26 @@ void one_producer_one_consumer() {
     // - Créer un producteur et un consommateur
     // - Créer les threads correspondants
     // - Attendre la fin des threads
- 
+
+    // Créer un générateur de nombres aléatoires
+    Random randomGenerator(50); // Max delay set to 50 milliseconds
+
+    // Créer une boîte à lettres
+    MessageBox messageBox;
+
+    // Créer un producteur et un consommateur
+    Producer producer(1, messageBox, randomGenerator, 20); // Producer with name 1 and 20 messages to produce
+    Consumer consumer(1, messageBox, randomGenerator, 20); // Consumer with name 1 and 20 messages to consume
+
+    // Créer les threads correspondants
+    std::thread producerThread(&Producer::operator(), &producer);
+    std::thread consumerThread(&Consumer::operator(), &consumer);
+
+    // Attendre la fin des threads
+    producerThread.join();
+    consumerThread.join();
 }
+
 
 /*
  * Test avec plusieurs producteurs et consommateurs
