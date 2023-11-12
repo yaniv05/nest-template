@@ -58,12 +58,33 @@ void several_producers_and_consumers() {
     // - Créer entre 10 et 20 consommateurs et 2 fois plus de producteurs 
     // - Créer les threads correspondants
     // - Attendre la fin des threads
- 
+    Random randomGenerator(10);  // Générateur pour le nombre de consommateurs
+    int numConsumers = 10 + randomGenerator(); // Nombre aléatoire de consommateurs entre 10 et 20
+    int numProducers = 2 * numConsumers; // Deux fois plus de producteurs que de consommateurs
+
+    MessageBox messageBox;
+    std::vector<std::thread> group;
+
+    // Création des producteurs
+    for (int i = 0; i < numProducers; ++i) {
+        group.push_back(std::thread(Producer(i, messageBox, randomGenerator, 10)));
+    }
+
+    // Création des consommateurs
+    for (int i = 0; i < numConsumers; ++i) {
+        group.push_back(std::thread(Consumer(i, messageBox, randomGenerator, 20)));
+    }
+
+    // Attendre la fin de tous les threads
+    for (auto& t : group) {
+        t.join();
+    }
 }
 
+
 int main() {
-    one_producer_one_consumer();
-    //several_producers_and_consumers();
+    //one_producer_one_consumer();
+    several_producers_and_consumers();
     return 0;
 }
 
