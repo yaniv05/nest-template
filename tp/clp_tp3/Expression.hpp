@@ -16,9 +16,13 @@ class Expression {
 public:
     // TODO
     virtual ~Expression() {}
+    virtual std::string afficher() const = 0;
     virtual Expression* clone() const = 0;
+
+    friend std::ostream& operator<<(std::ostream& os, const Expression& expr);
 private:
 };
+
 
 class Nombre : public Expression {
     int valeur;
@@ -35,6 +39,10 @@ public:
     int getValeur() const {
         return valeur;
     }
+
+    std::string afficher() const override {
+        return std::to_string(valeur);
+    }
 };
 
 class Variable : public Expression {
@@ -50,6 +58,10 @@ public:
     }
 
     std::string getNom() const {
+        return nom;
+    }
+
+    std::string afficher() const override {
         return nom;
     }
 

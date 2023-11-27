@@ -11,6 +11,10 @@
 
 #include "Expression.hpp"
 
+std::ostream& operator<<(std::ostream& os, const Expression& expr) {
+    os << expr.afficher();
+    return os;
+}
 
 
 

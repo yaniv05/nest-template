@@ -13,6 +13,16 @@
 
 #include "Expression.hpp"
 
+TEST(ExpressionTest, AffichageNombre) {
+    Nombre n(5);
+    EXPECT_EQ(n.afficher(), "5");
+}
+
+TEST(ExpressionTest, AffichageVariable) {
+    Variable v("x");
+    EXPECT_EQ(v.afficher(), "x");
+}
+
  
 int main( int argc, char * argv[] )
 {
