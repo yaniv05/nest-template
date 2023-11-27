@@ -117,6 +117,77 @@ class Variable : public Expression {
 
 };
 
+class Operation : public Expression {
+protected:
+    Expression* gauche;
+    Expression* droite;
+
+public:
+    Operation(Expression* g, Expression* d) 
+        : gauche(g->clone()), droite(d->clone()) {}
+
+    ~Operation() {
+        delete gauche;
+        delete droite;
+    }
+
+    // Constructeur de copie
+    Operation(const Operation& autre)
+        : gauche(autre.gauche->clone()), droite(autre.droite->clone()) {}
+
+    virtual std::string afficher() const = 0;
+    virtual Expression* deriver(const std::string& var) const = 0;
+    virtual Expression* clone() const = 0;
+
+};
+
+class Addition : public Operation {
+public:
+    Addition(Expression* gauche, Expression* droite) 
+        : Operation(gauche, droite) {}
+
+    // Méthode pour afficher l'addition
+    std::string afficher() const override {
+        return "(" + gauche->afficher() + " + " + droite->afficher() + ")";
+    }
+
+    // Méthode pour dériver l'addition
+    Expression* deriver(const std::string& var) const override {
+        return new Addition(gauche->deriver(var), droite->deriver(var));
+    }
+
+    // Méthode pour cloner l'objet
+    Expression* clone() const override {
+        return new Addition(*this);
+    }
+};
+
+class Multiplication : public Operation {
+public:
+    Multiplication(Expression* gauche, Expression* droite) 
+        : Operation(gauche, droite) {}
+
+    // Méthode pour afficher la multiplication
+    std::string afficher() const override {
+        return "(" + gauche->afficher() + " * " + droite->afficher() + ")";
+    }
+
+    // Méthode pour dériver la multiplication
+    Expression* deriver(const std::string& var) const override {
+        // Règle du produit : (u*v)' = u'*v + u*v'
+        return new Addition(
+            new Multiplication(gauche->deriver(var), droite->clone()),
+            new Multiplication(gauche->clone(), droite->deriver(var))
+        );
+    }
+
+    // Méthode pour cloner l'objet
+    Expression* clone() const override {
+        return new Multiplication(*this);
+    }
+};
+
+
 
 
 

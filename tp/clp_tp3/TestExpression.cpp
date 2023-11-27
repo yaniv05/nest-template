@@ -41,6 +41,58 @@ TEST(ExpressionTest, DerivationVariable) {
     delete derivee2;
 }
 
+TEST(AdditionTest, AffichageAddition) {
+    Expression* gauche = new Nombre(3);
+    Expression* droite = new Nombre(4);
+    Expression* addition = new Addition(gauche, droite);
+
+    EXPECT_EQ(addition->afficher(), "(3 + 4)");
+
+    delete gauche;
+    delete droite;
+    delete addition;
+}
+
+TEST(AdditionTest, DerivationAddition) {
+    Expression* gauche = new Variable("x");
+    Expression* droite = new Nombre(5);
+    Expression* addition = new Addition(gauche, droite);
+
+    Expression* derivee = addition->deriver("x");
+    EXPECT_EQ(derivee->afficher(), "(1 + 0)");
+
+    delete gauche;
+    delete droite;
+    delete addition;
+    delete derivee;
+}
+
+
+TEST(MultiplicationTest, AffichageMultiplication) {
+    Expression* gauche = new Nombre(3);
+    Expression* droite = new Nombre(4);
+    Expression* multiplication = new Multiplication(gauche, droite);
+
+    EXPECT_EQ(multiplication->afficher(), "(3 * 4)");
+
+    delete gauche;
+    delete droite;
+    delete multiplication;
+}
+
+TEST(MultiplicationTest, DerivationMultiplication) {
+    Expression* gauche = new Variable("x");
+    Expression* droite = new Nombre(5);
+    Expression* multiplication = new Multiplication(gauche, droite);
+
+    Expression* derivee = multiplication->deriver("x");
+    EXPECT_EQ(derivee->afficher(), "((1 * 5) + (x * 0))");
+
+    delete gauche;
+    delete droite;
+    delete multiplication;
+    delete derivee;
+}
 
  
 int main( int argc, char * argv[] )
