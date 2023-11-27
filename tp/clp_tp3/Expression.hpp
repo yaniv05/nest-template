@@ -29,6 +29,7 @@ public:
     virtual std::string afficher() const = 0;
     virtual Expression* clone() const = 0;
     virtual Expression* deriver(const std::string& var) const = 0;
+    virtual Expression* simplifier() const = 0;
 
     friend std::ostream& operator<<(std::ostream& os, const Expression& expr);
 private:
@@ -72,6 +73,12 @@ class Nombre : public Expression {
             std::cout << "Nombre - Créés: " << instancesCrees 
                     << ", Détruits: " << instancesDetruites << std::endl;
         }
+
+        Expression* simplifier() const override {
+            // La simplification d'un nombre est le nombre lui-même
+            return new Nombre(*this);
+        }
+
 };
 
 class Variable : public Expression {
@@ -115,6 +122,9 @@ class Variable : public Expression {
                     << ", Détruits: " << instancesDetruites << std::endl;
         }
 
+        Expression* simplifier() const override {
+            return new Variable(*this);
+        }
 };
 
 class Operation : public Expression {
@@ -160,6 +170,24 @@ public:
     Expression* clone() const override {
         return new Addition(*this);
     }
+
+    Expression* simplifier() const override {
+        Expression* simplifieGauche = gauche->simplifier();
+        Expression* simplifieDroite = droite->simplifier();
+
+        // Simplification : x + 0 = x
+        if (dynamic_cast<Nombre*>(simplifieDroite) && 
+            static_cast<Nombre*>(simplifieDroite)->getValeur() == 0) {
+            delete simplifieDroite; // Libérer la mémoire de l'opérande inutilisé
+            return simplifieGauche;
+        }
+
+
+        delete simplifieGauche; // Libérer la mémoire si une nouvelle expression est retournée
+        delete simplifieDroite; // Libérer la mémoire si une nouvelle expression est retournée
+        return new Addition(simplifieGauche, simplifieDroite);
+    }
+
 };
 
 class Multiplication : public Operation {
@@ -185,6 +213,46 @@ public:
     Expression* clone() const override {
         return new Multiplication(*this);
     }
+
+
+
+    Expression* simplifier() const override {
+        Expression* simplifieGauche = gauche->simplifier();
+        Expression* simplifieDroite = droite->simplifier();
+
+        // Règle de simplification : 0 * x = 0
+        if (dynamic_cast<Nombre*>(simplifieGauche) && 
+            static_cast<Nombre*>(simplifieGauche)->getValeur() == 0) {
+            delete simplifieDroite; // Libérer la mémoire de l'opérande inutilisé
+            return new Nombre(0);
+        }
+
+        // Règle de simplification : x * 0 = 0
+        if (dynamic_cast<Nombre*>(simplifieDroite) && 
+            static_cast<Nombre*>(simplifieDroite)->getValeur() == 0) {
+            delete simplifieGauche; // Libérer la mémoire de l'opérande inutilisé
+            return new Nombre(0);
+        }
+
+        // Règle de simplification : x * 1 = x
+        if (dynamic_cast<Nombre*>(simplifieDroite) && 
+            static_cast<Nombre*>(simplifieDroite)->getValeur() == 1) {
+            delete simplifieDroite; // Libérer la mémoire de l'opérande inutilisé
+            return simplifieGauche;
+        }
+
+        // Si aucune règle de simplification ne s'applique, retourner une nouvelle multiplication
+        if (simplifieGauche == gauche && simplifieDroite == droite) {
+            // Aucune simplification n'a été appliquée, retourner une copie de l'opération actuelle
+            return new Multiplication(simplifieGauche, simplifieDroite);
+        } else {
+            Multiplication* nouvelleMultiplication = new Multiplication(simplifieGauche, simplifieDroite);
+            delete simplifieGauche; // Libérer la mémoire si une nouvelle expression est créée
+            delete simplifieDroite; // Libérer la mémoire si une nouvelle expression est créée
+            return nouvelleMultiplication;
+        }
+    }
+
 };
 
 

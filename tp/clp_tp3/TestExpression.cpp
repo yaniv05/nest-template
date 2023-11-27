@@ -94,6 +94,49 @@ TEST(MultiplicationTest, DerivationMultiplication) {
     delete derivee;
 }
 
+TEST(AdditionTest, SimplificationAvecZero) {
+    Expression* x = new Variable("x");
+    Expression* zero = new Nombre(0);
+    Expression* addition = new Addition(x, zero);
+
+    Expression* simplifie = addition->simplifier();
+    EXPECT_EQ(simplifie->afficher(), "x");
+
+    delete x;
+    delete zero;
+    delete addition;
+    delete simplifie;
+}
+
+TEST(MultiplicationTest, SimplificationMultiplicationParZero) {
+    Expression* x = new Variable("x");
+    Expression* zero = new Nombre(0);
+    Expression* multiplication = new Multiplication(x, zero);
+
+    Expression* simplifie = multiplication->simplifier();
+    EXPECT_EQ(simplifie->afficher(), "0");
+
+    delete x;
+    delete zero;
+    delete multiplication;
+    delete simplifie;
+}
+
+TEST(MultiplicationTest, SimplificationMultiplicationParUn) {
+    Expression* x = new Variable("x");
+    Expression* un = new Nombre(1);
+    Expression* multiplication = new Multiplication(x, un);
+
+    Expression* simplifie = multiplication->simplifier();
+    EXPECT_EQ(simplifie->afficher(), "x");
+
+    delete x;
+    delete un;
+    delete multiplication;
+    delete simplifie;
+}
+
+
  
 int main( int argc, char * argv[] )
 {
