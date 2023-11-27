@@ -23,9 +23,33 @@ TEST(ExpressionTest, AffichageVariable) {
     EXPECT_EQ(v.afficher(), "x");
 }
 
+TEST(ExpressionTest, DerivationNombre) {
+    Nombre n(5);
+    Expression* derivee = n.deriver("x");
+    EXPECT_EQ(derivee->afficher(), "0");
+    delete derivee;
+}
+
+TEST(ExpressionTest, DerivationVariable) {
+    Variable v("x");
+    Expression* derivee1 = v.deriver("x");
+    EXPECT_EQ(derivee1->afficher(), "1");
+    delete derivee1;
+
+    Expression* derivee2 = v.deriver("y");
+    EXPECT_EQ(derivee2->afficher(), "0");
+    delete derivee2;
+}
+
+
  
 int main( int argc, char * argv[] )
 {
     ::testing::InitGoogleTest( &argc, argv );
-    return RUN_ALL_TESTS();
+    int result = RUN_ALL_TESTS();
+
+    Nombre::afficherComptage();
+    Variable::afficherComptage();
+
+    return result;
 }

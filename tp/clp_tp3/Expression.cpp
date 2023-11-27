@@ -16,5 +16,8 @@ std::ostream& operator<<(std::ostream& os, const Expression& expr) {
     return os;
 }
 
+int Nombre::instancesCrees = 0;
+int Nombre::instancesDetruites = 0;
 
-
+int Variable::instancesCrees = 0;
+int Variable::instancesDetruites = 0;
